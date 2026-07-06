@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "generatedFor": "0.1.0",
+  "plugins": [
+    {
+      "id": "roadmap.ai",
+      "name": "AI",
+      "version": "0.1.0",
+      "description": "AI providers / proxy / tasks configuration + provider connection testing.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "AI providers, proxy, and tasks settings tabs."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-ai",
+      "wheel": "roadmap_plugin_ai-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_ai-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.context",
+      "name": "Contexts",
+      "version": "0.1.0",
+      "description": "Context extension points — item types + preview contributions, /api/contexts, and the MCP server.",
+      "author": "B2IT",
+      "requires": [],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.context.itemTypes",
+            "description": "How to resolve + render a context item type."
+          },
+          {
+            "point": "roadmap.context.previewContributions",
+            "description": "Live preview/inquiry rendering for a kind."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "Built-in item types (instructions, scratch_dir, mixin, url, git_repo, repo_file, commits)."
+          },
+          {
+            "point": "roadmap.context.previewContributions",
+            "detail": "Built-in preview renderers."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-context",
+      "wheel": "roadmap_plugin_context-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_context-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.fileviewer",
+      "name": "File Viewers",
+      "version": "0.1.0",
+      "description": "File viewer plugin (browse-dir API + PlantUML/markdown/image viewers + settings).",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "File Viewers settings tab."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-fileviewer",
+      "wheel": "roadmap_plugin_fileviewer-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_fileviewer-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.jira",
+      "name": "Jira / Atlassian",
+      "version": "0.1.0",
+      "description": "Jira/Atlassian implementation of the settings + context extension points.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Atlassian (Jira + Confluence) settings tab."
+          },
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "confluence_page, jira_issue item types."
+          },
+          {
+            "point": "roadmap.context.previewContributions",
+            "detail": "Confluence page / Jira issue previews."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-jira",
+      "wheel": "roadmap_plugin_jira-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_jira-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.settings",
+      "name": "Settings",
+      "version": "0.1.0",
+      "description": "Settings extension point — lets plugins contribute configuration sections.",
+      "author": "B2IT",
+      "requires": [],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.settings.sections",
+            "description": "A configuration tab contributed by a plugin."
+          }
+        ],
+        "implements": []
+      },
+      "package": "roadmap-plugin-settings",
+      "wheel": "roadmap_plugin_settings-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_settings-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.whisper",
+      "name": "Whisper",
+      "version": "0.1.0",
+      "description": "Whisper speech-to-text plugin (settings section + /api/whisper).",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Whisper settings tab."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-whisper",
+      "wheel": "roadmap_plugin_whisper-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_whisper-0.1.0-py3-none-any.whl"
+    }
+  ]
+}
