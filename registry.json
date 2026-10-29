@@ -284,6 +284,29 @@
       "package": "roadmap-plugin-trello",
       "wheel": "roadmap_plugin_trello-0.1.0-py3-none-any.whl",
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_trello-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.users",
+      "name": "Users",
+      "version": "0.1.0",
+      "status": "published",
+      "description": "Users and roles. A root user, created on first start, administers; admins add users as admin (configuration, plugins, workspaces, users), editor (reads and writes the knowledge base, runs flows, uses MCP) or viewer (reads). Users sign in in the browser; MCP clients and scripts use personal API tokens. Stored in a file next to the configuration; another provider (OAuth, a directory) can take its place.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Account (everyone) and Users (admins) tabs under System."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-users",
+      "wheel": "roadmap_plugin_users-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_users-0.1.0-py3-none-any.whl"
     }
   ]
 }
