@@ -53,7 +53,7 @@
       "name": "Bitbucket",
       "version": "0.1.0",
       "status": "published",
-      "description": "Adds Bitbucket pull requests as a context item type, with its own connection settings and token test.",
+      "description": "Bitbucket as an information source: connection settings and a token test, under Information Sources (a Layer 1 source for the knowledge base). Where Contexts is installed (Lite), it also adds pull requests as a context item type.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings"
@@ -279,7 +279,7 @@
       "name": "Trello",
       "version": "0.1.0",
       "status": "published",
-      "description": "Adds Trello cards as a context item type, with connection settings, configured boards and MCP tools.",
+      "description": "Trello as an information source: connection settings, a token test and the configured boards, under Information Sources (a Layer 1 source for the knowledge base). Where Contexts is installed (Lite), it also adds Trello cards as a context item type and the Trello MCP tools.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings"
