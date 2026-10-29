@@ -224,7 +224,7 @@
         "roadmap.jobs"
       ],
       "extensionPoints": {
-        "provides": [
+        "defines": [
           {
             "point": "roadmap.knowledgebase.flows.readers",
             "detail": "FlowReader — turns a flow's source into the material its prompt is built from. Built-ins: repo (a configured Git Repo's working tree), kb_source (nodes already in the graph), context (a Roadmap context)."
