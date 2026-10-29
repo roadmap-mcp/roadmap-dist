@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "id": "e2e-testing",
+  "name": "End-to-end testing (Playwright)",
+  "version": "1.0.0",
+  "status": "published",
+  "description": "For testers verifying an application from the outside with Playwright. Gives test suites (one per spec file) and test scenarios derived from use cases, with given/when/then and their current status.",
+  "author": "B2IT",
+  "personas": [
+    {
+      "id": "testing",
+      "name": "Testing",
+      "description": "The tester, verifying the target application from the outside with Playwright end-to-end tests derived from the use cases. A scenario names the use case it proves, the spec that proves it, and its current status."
+    }
+  ],
+  "node_types": [
+    {
+      "id": "test-suite",
+      "name": "Test suite",
+      "description": "One Playwright spec file in the test project (specs drive the application through page objects). Its test scenarios sit in it.",
+      "form": "unstructured",
+      "category": "folder",
+      "persona": "testing",
+      "parent_type": "",
+      "fields": [],
+      "template": "",
+      "icon": "bi-collection-play",
+      "states": []
+    },
+    {
+      "id": "test-scenario",
+      "name": "Test scenario",
+      "description": "One end-to-end test of the target application, written from a use case: what it sets up, what the user does, what must be true afterwards, and whether it passes.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "testing",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "use_case",
+          "label": "Use case",
+          "type": "text",
+          "required": true,
+          "hint": "The use case it proves, by its exact title."
+        },
+        {
+          "name": "spec",
+          "label": "Spec",
+          "type": "text",
+          "required": true,
+          "hint": "The spec file and test title: `tests/sign-in.spec.ts` › `signs in with valid credentials`."
+        },
+        {
+          "name": "given",
+          "label": "Given",
+          "type": "long-text",
+          "required": true,
+          "hint": "The state before the test: data, user, page."
+        },
+        {
+          "name": "when",
+          "label": "When",
+          "type": "long-text",
+          "required": true,
+          "hint": "What the user does, step by step."
+        },
+        {
+          "name": "then",
+          "label": "Then",
+          "type": "long-text",
+          "required": true,
+          "hint": "What must be true afterwards, as the user sees it."
+        },
+        {
+          "name": "data",
+          "label": "Test data",
+          "type": "long-text",
+          "required": false,
+          "hint": "The data the test relies on and how it gets there."
+        },
+        {
+          "name": "status",
+          "label": "Status",
+          "type": "text",
+          "required": true,
+          "hint": "passing, failing or skipped — with the reason when it is not passing."
+        }
+      ],
+      "template": "",
+      "icon": "bi-clipboard-check",
+      "states": []
+    }
+  ]
+}

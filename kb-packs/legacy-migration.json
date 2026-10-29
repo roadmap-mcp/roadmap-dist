@@ -1,0 +1,485 @@
+{
+  "format": 1,
+  "id": "legacy-migration",
+  "name": "Legacy migration (Delphi to Java)",
+  "version": "1.0.0",
+  "status": "published",
+  "description": "For technical designers moving a Delphi (VCL, Kylix or Lazarus) application to Java with Spring Boot and Angular. Gives topics that reverse engineer the existing forms, units and database, per-step migration designs, and a project, phase and step work breakdown with build order and status.",
+  "author": "B2IT",
+  "personas": [
+    {
+      "id": "technical-design",
+      "name": "Technical Design",
+      "description": "The technical designer, reverse engineering the Delphi (VCL) implementation that exists today. Everything here is deliberately technology specific: which unit, which form class, which component, which query, which table. This is the record of what has to be replaced, and what the Java design has to account for."
+    }
+  ],
+  "node_types": [
+    {
+      "id": "design-area",
+      "name": "Design area",
+      "description": "A group of implementation topics. For code, the source folder a unit lives in (the repository root when the code is not split into folders). For the schema, the part of the database its objects belong to. The per-step migration designs sit together in a \"Migration designs\" area. Every implementation topic sits in exactly one.",
+      "form": "unstructured",
+      "category": "folder",
+      "persona": "technical-design",
+      "parent_type": "",
+      "fields": [],
+      "template": "",
+      "icon": "bi-folder2-open",
+      "states": []
+    },
+    {
+      "id": "screen-implementation",
+      "name": "Screen implementation",
+      "description": "How one Delphi form works today, in enough detail to rebuild its behaviour in Java. One topic per form: one `.pas` unit with a matching `.dfm` (`.xfm` under Kylix/CLX, `.lfm` under Lazarus). This is a record of an implementation, so being specific is the point. Name the unit, the form class, the components, the queries and the tables.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "technical-design",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "use_case",
+          "label": "Use case",
+          "type": "text",
+          "required": false,
+          "hint": "The use case this screen serves, by title. One screen may serve several, and a helper dialog serves the use case that opens it."
+        },
+        {
+          "name": "form_unit",
+          "label": "Form unit",
+          "type": "text",
+          "required": true,
+          "hint": "The unit, as a path in the repository, e.g. `Forms/CustomerEdit_U.pas`."
+        },
+        {
+          "name": "form_class",
+          "label": "Form class",
+          "type": "text",
+          "required": false,
+          "hint": "The form class declared in it, e.g. `TfrmCustomerEdit`."
+        },
+        {
+          "name": "opened_from",
+          "label": "Opened from",
+          "type": "text",
+          "required": false,
+          "hint": "Which menu entry or which other units open it, and whether it is modal."
+        },
+        {
+          "name": "controls",
+          "label": "Controls and bindings",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the user sees, and what each control is bound to: the dataset and field behind a data-aware control, the source of a lookup list."
+        },
+        {
+          "name": "data_access",
+          "label": "Data access",
+          "type": "long-text",
+          "required": false,
+          "hint": "The databases, transactions and queries it uses, with the tables and columns touched and the SQL where it is written in the unit. Name the data-access components (ADO connection, tables, queries) and the data module they live in."
+        },
+        {
+          "name": "behaviour",
+          "label": "Behaviour",
+          "type": "long-text",
+          "required": false,
+          "hint": "What each event handler does, in the order it happens. Include what runs on open and on close, and where a transaction is started and committed."
+        },
+        {
+          "name": "validation",
+          "label": "Validation",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the code refuses, how it tells the user, and what it does silently."
+        },
+        {
+          "name": "migration_risk",
+          "label": "Migration risk",
+          "type": "long-text",
+          "required": false,
+          "hint": "What does not survive the move to Java: VCL specifics, modal flow, client-side data handling, logic held in component state, hard-coded limits, anything keyed to one user or role."
+        }
+      ],
+      "template": "",
+      "icon": "bi-window-stack",
+      "states": []
+    },
+    {
+      "id": "unit-implementation",
+      "name": "Unit implementation",
+      "description": "How one Delphi unit that is not a form works today: a data module, a unit of helpers, a unit of shared types or constants. One topic per unit, specific about what it declares, which connections and queries it holds, and who uses it.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "technical-design",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "unit",
+          "label": "Unit",
+          "type": "text",
+          "required": true,
+          "hint": "The unit, as a path in the repository, e.g. `Data/MainDataModule.pas`."
+        },
+        {
+          "name": "purpose",
+          "label": "Purpose",
+          "type": "long-text",
+          "required": true,
+          "hint": "What the unit is for, in one or two sentences."
+        },
+        {
+          "name": "contents",
+          "label": "What it declares",
+          "type": "long-text",
+          "required": false,
+          "hint": "The classes, components, routines, types and constants it declares, each with what it does."
+        },
+        {
+          "name": "data_access",
+          "label": "Data access",
+          "type": "long-text",
+          "required": false,
+          "hint": "The connections, transactions and queries it holds, with the tables touched and the SQL where it is written in the unit."
+        },
+        {
+          "name": "behaviour",
+          "label": "Behaviour",
+          "type": "long-text",
+          "required": false,
+          "hint": "What happens on creation and destruction, and the logic other units rely on, in the order it runs."
+        },
+        {
+          "name": "used_by",
+          "label": "Used by",
+          "type": "text",
+          "required": false,
+          "hint": "Which units use it, and for what."
+        },
+        {
+          "name": "migration_risk",
+          "label": "Migration risk",
+          "type": "long-text",
+          "required": false,
+          "hint": "What does not survive the move to Java: global state, VCL specifics, behaviour hidden in component properties, hard-coded values."
+        }
+      ],
+      "template": "",
+      "icon": "bi-file-earmark-code",
+      "states": []
+    },
+    {
+      "id": "database-design",
+      "name": "Database design",
+      "description": "One object of the database the legacy application runs on: a table, a view, a query, a stored procedure, a trigger or a sequence. The schema carries behaviour as well as data, so a trigger or a procedure is as much a design topic as a table, and the Java design has to decide where that behaviour goes.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "technical-design",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "object_kind",
+          "label": "Object kind",
+          "type": "text",
+          "required": true,
+          "hint": "One of: table, view, query, procedure, trigger, sequence."
+        },
+        {
+          "name": "object_name",
+          "label": "Object name",
+          "type": "text",
+          "required": true,
+          "hint": "Exactly as the database has it, e.g. `tblOrders`."
+        },
+        {
+          "name": "source",
+          "label": "Source",
+          "type": "text",
+          "required": false,
+          "hint": "Where this definition comes from: the schema scripts in the repository (name the folder), reconstructed from the code (name the units), or both, and where they disagree."
+        },
+        {
+          "name": "purpose",
+          "label": "Purpose",
+          "type": "long-text",
+          "required": true,
+          "hint": "What it holds or does, in business terms where they can be recovered from the name, the columns and the code that uses it. Say so when they cannot."
+        },
+        {
+          "name": "columns",
+          "label": "Columns",
+          "type": "long-text",
+          "required": false,
+          "hint": "For a table or a view: each column with its type, whether it may be null, and its default. For a procedure: its parameters and what it returns."
+        },
+        {
+          "name": "keys",
+          "label": "Keys",
+          "type": "text",
+          "required": false,
+          "hint": "Primary key, unique keys and foreign keys, with the columns involved."
+        },
+        {
+          "name": "relationships",
+          "label": "Relationships",
+          "type": "long-text",
+          "required": false,
+          "hint": "What it refers to and what refers to it, and whether the reference is enforced by the database or only by the application."
+        },
+        {
+          "name": "rules_in_the_database",
+          "label": "Rules held in the database",
+          "type": "long-text",
+          "required": false,
+          "hint": "Triggers, constraints, generators and procedure logic that enforce behaviour here rather than in the application. This is the part most easily lost in a rewrite."
+        },
+        {
+          "name": "used_by",
+          "label": "Used by",
+          "type": "text",
+          "required": false,
+          "hint": "Which screens or use cases depend on it."
+        },
+        {
+          "name": "migration_risk",
+          "label": "Migration risk",
+          "type": "long-text",
+          "required": false,
+          "hint": "What a Java data layer has to be careful with: database-specific types (Access, Paradox, InterBase/Firebird and the like), autonumbers and generators, currency and date handling, behaviour living in a data module, columns whose meaning is positional or encoded."
+        }
+      ],
+      "template": "",
+      "icon": "bi-database",
+      "states": []
+    },
+    {
+      "id": "database-diagram",
+      "name": "Database diagram",
+      "description": "A picture of a database, or of part of one: its tables with their columns and keys, and how they refer to each other. Drawn from the database design topics it shows (the columns, keys and relationships they give), so a reader sees the whole before opening a table.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "technical-design",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "database",
+          "label": "Database",
+          "type": "text",
+          "required": true,
+          "hint": "The database it shows, as its design folder names it, e.g. \"Main.mdb\" or \"SALES\"."
+        },
+        {
+          "name": "overview",
+          "label": "Overview",
+          "type": "long-text",
+          "required": true,
+          "hint": "What the diagram covers and what it leaves out, in a few sentences."
+        },
+        {
+          "name": "diagram",
+          "label": "Diagram",
+          "type": "mermaid",
+          "required": true,
+          "hint": "A Mermaid erDiagram: every table with its columns (type, name, PK/FK/UK, a short quoted comment where it matters), and the relationships with their cardinality — dashed (..) where nothing in the database enforces them. A sentence before it says how to read it."
+        },
+        {
+          "name": "notes",
+          "label": "Notes",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the picture cannot say: rules kept in the code, data that breaks the relationships, what the new schema changes — a subsection each."
+        }
+      ],
+      "template": "",
+      "icon": "bi-diagram-2",
+      "states": []
+    },
+    {
+      "id": "migration-design",
+      "name": "Migration design",
+      "description": "How one migration step will be built in the Java target application, derived from the technical analysis of the Delphi code it replaces and following the target architecture and conventions. One per migration step. It is what the developer builds from, so it decides; what it leaves open, the developer decides and records.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "technical-design",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "step",
+          "label": "Migration step",
+          "type": "text",
+          "required": true,
+          "hint": "The migration step this designs, by its exact title."
+        },
+        {
+          "name": "data_model",
+          "label": "Data model",
+          "type": "long-text",
+          "required": false,
+          "hint": "The target database tables, columns, keys and constraints this step needs, and the schema migrations that create them (for example Flyway or Liquibase scripts, named by the project's convention). Say which old tables or columns they replace."
+        },
+        {
+          "name": "backend",
+          "label": "Backend",
+          "type": "long-text",
+          "required": false,
+          "hint": "Per backend module or layer (API contracts, domain, business, REST): the DTOs and API interfaces, entities and repositories, services and mappers, controllers and the REST endpoints (method, path, request, response, errors), transactions and security."
+        },
+        {
+          "name": "frontend",
+          "label": "Frontend",
+          "type": "long-text",
+          "required": false,
+          "hint": "Angular routes, components and services, and what each shows and does, naming per screen the UI library components it is built from (as the component library's pages call them, e.g. the PrimeNG specialist's)."
+        },
+        {
+          "name": "mapping",
+          "label": "Old to new",
+          "type": "long-text",
+          "required": false,
+          "hint": "For each unit, query and table in scope: what replaces it, or that it is dropped and why."
+        },
+        {
+          "name": "decisions",
+          "label": "Decisions",
+          "type": "long-text",
+          "required": false,
+          "hint": "The choices made, with their reasons, including what is deliberately not carried over."
+        },
+        {
+          "name": "tests",
+          "label": "What the tests must prove",
+          "type": "long-text",
+          "required": false,
+          "hint": "The behaviour the integration tests and the end-to-end tests have to show, per use case."
+        },
+        {
+          "name": "open_questions",
+          "label": "Open questions",
+          "type": "long-text",
+          "required": false,
+          "hint": "What could not be decided from the code or the knowledge base."
+        }
+      ],
+      "template": "",
+      "icon": "bi-rulers",
+      "states": []
+    },
+    {
+      "id": "migration-project",
+      "name": "Migration project",
+      "description": "The whole move of one application off Delphi. The top of the work breakdown: everything else hangs under it, and a question about the migration as a whole collects what every audience has written under it.",
+      "form": "unstructured",
+      "category": "work",
+      "persona": "",
+      "parent_type": "",
+      "fields": [],
+      "template": "",
+      "icon": "bi-kanban",
+      "states": []
+    },
+    {
+      "id": "migration-phase",
+      "name": "Phase",
+      "description": "A stage of the migration. Understanding the code that exists is one phase; carrying the migration out is another, and it is the one that breaks down per screen.",
+      "form": "unstructured",
+      "category": "work",
+      "persona": "",
+      "parent_type": "migration-project",
+      "fields": [],
+      "template": "",
+      "icon": "bi-signpost-2",
+      "states": []
+    },
+    {
+      "id": "migration-step",
+      "name": "Migration step",
+      "description": "One unit of migration work under a phase. Usually one screen's worth (the work that takes a single Delphi form to its Java replacement), but it can also be a piece of shared groundwork the screens depend on (signing in, the data access, the main frame), which then has no form of its own. What the analyst and the designer write about that screen is linked to this step, which is how a developer picking it up gets both halves at once. The steps are built in the order of their sequence number: what others depend on comes first.",
+      "form": "structured",
+      "category": "work",
+      "persona": "",
+      "parent_type": "migration-phase",
+      "fields": [
+        {
+          "name": "sequence",
+          "label": "Build order",
+          "type": "number",
+          "required": true,
+          "hint": "Position in the build order within the phase: 1 is built first. Every step comes after all the steps it depends on."
+        },
+        {
+          "name": "form_unit",
+          "label": "Form unit",
+          "type": "text",
+          "required": false,
+          "hint": "The Delphi unit this step replaces, as a path, e.g. `Forms/CustomerEdit_U.pas`. Empty for groundwork that has no form."
+        },
+        {
+          "name": "form_class",
+          "label": "Form class",
+          "type": "text",
+          "required": false,
+          "hint": "The form class, e.g. `TfrmCustomerEdit`."
+        },
+        {
+          "name": "subsystem",
+          "label": "Subsystem",
+          "type": "text",
+          "required": false,
+          "hint": "The source folder it comes from (the repository root when the code is not split into folders)."
+        },
+        {
+          "name": "depends_on",
+          "label": "Depends on",
+          "type": "text",
+          "required": false,
+          "hint": "The steps that must be finished before this one, by exact title, separated by \"; \". Empty when it needs nothing else."
+        },
+        {
+          "name": "use_cases",
+          "label": "Use cases delivered",
+          "type": "text",
+          "required": false,
+          "hint": "The use cases this step makes work again, by their exact title in the analysis, separated by \"; \"."
+        },
+        {
+          "name": "rationale",
+          "label": "Why here",
+          "type": "long-text",
+          "required": false,
+          "hint": "Why it sits at this point in the order: what it needs, and what depends on it."
+        }
+      ],
+      "template": "",
+      "icon": "bi-arrow-right-square",
+      "states": [
+        {
+          "id": "planned",
+          "label": "Planned"
+        },
+        {
+          "id": "analysing",
+          "label": "Analysing"
+        },
+        {
+          "id": "analysed",
+          "label": "Analysed"
+        },
+        {
+          "id": "developing",
+          "label": "Developing"
+        },
+        {
+          "id": "developed",
+          "label": "Developed"
+        },
+        {
+          "id": "testing",
+          "label": "Testing"
+        },
+        {
+          "id": "done",
+          "label": "Done"
+        }
+      ]
+    }
+  ]
+}

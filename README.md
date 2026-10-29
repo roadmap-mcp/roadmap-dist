@@ -23,3 +23,8 @@ To be released soon.
 - [`registry/pro.json`](registry/pro.json) — the plugins published for Pro; the app's
   Settings → System → Admin installs the ones not bundled (such as Trello) from here.
 - `plugins/*.whl` — the plugin wheels.
+
+## Knowledge base packs
+
+- [`kb-packs/index.json`](kb-packs/index.json) — ready-made personas and node types;
+  the app's Settings → Knowledge Base → Layer 2 installs them (Browse packs).

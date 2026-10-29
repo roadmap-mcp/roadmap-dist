@@ -1,0 +1,163 @@
+{
+  "format": 1,
+  "id": "development",
+  "name": "Development",
+  "version": "1.0.0",
+  "status": "published",
+  "description": "For developers, often an AI, building the target application. Gives development areas, implementation records per step of work, project-wide guidelines and sequence diagrams drawn from the code as built.",
+  "author": "B2IT",
+  "personas": [
+    {
+      "id": "development",
+      "name": "Development",
+      "description": "The developer building the target application, usually an AI. Everything here is about the target: modules, classes, endpoints, schema migrations, tests, and how to run them."
+    }
+  ],
+  "node_types": [
+    {
+      "id": "development-area",
+      "name": "Development area",
+      "description": "A part of the target application: a backend module or package, a frontend feature, or project-wide. Every development topic sits in exactly one.",
+      "form": "unstructured",
+      "category": "folder",
+      "persona": "development",
+      "parent_type": "",
+      "fields": [],
+      "template": "",
+      "icon": "bi-folder2",
+      "states": []
+    },
+    {
+      "id": "implementation-record",
+      "name": "Implementation record",
+      "description": "What was built for one step of work (for example a migration step or a feature): where it is, how to run it, how it was tested and with what result, and where it departs from the design or from the current behaviour. The record the next step builds on.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "development",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "step",
+          "label": "Step",
+          "type": "text",
+          "required": true,
+          "hint": "The step of work this implements (for example a migration step), by its exact title."
+        },
+        {
+          "name": "backend_changes",
+          "label": "Backend",
+          "type": "long-text",
+          "required": false,
+          "hint": "Files and classes added or changed in the backend, per module, the endpoints, and the schema migrations added."
+        },
+        {
+          "name": "frontend_changes",
+          "label": "Frontend",
+          "type": "long-text",
+          "required": false,
+          "hint": "Routes, components and services added or changed in the frontend, and the UI library components used."
+        },
+        {
+          "name": "tests",
+          "label": "Tests",
+          "type": "long-text",
+          "required": true,
+          "hint": "The integration tests (class and method names), what each proves, how to run them, and the result of the last run."
+        },
+        {
+          "name": "how_to_run",
+          "label": "How to run it",
+          "type": "long-text",
+          "required": false,
+          "hint": "What to start, in which order, and what to open to see it work."
+        },
+        {
+          "name": "deviations",
+          "label": "Deviations",
+          "type": "long-text",
+          "required": false,
+          "hint": "Where it departs from the migration design or from the current behaviour, and why."
+        },
+        {
+          "name": "open_issues",
+          "label": "Open issues",
+          "type": "long-text",
+          "required": false,
+          "hint": "What is unfinished, known to be wrong, or waiting for a decision."
+        }
+      ],
+      "template": "",
+      "icon": "bi-code-square",
+      "states": []
+    },
+    {
+      "id": "guideline",
+      "name": "Guideline",
+      "description": "A project-wide rule for building the target application: its architecture, conventions, tooling and ways of working. Belongs in the context of every step of work it applies to.",
+      "form": "unstructured",
+      "category": "topic",
+      "persona": "development",
+      "parent_type": "",
+      "fields": [],
+      "template": "## Applies to\n\n## Rules\n\n## How to\n",
+      "icon": "bi-book",
+      "states": []
+    },
+    {
+      "id": "sequence-diagram",
+      "name": "Sequence diagram",
+      "description": "How one flow of the application runs through its code: the screen, the frontend services, the API endpoints, the services and the data access, in the order they call each other. One topic per flow a user goes through (placing an order, approving an invoice), drawn from the code as built, so a developer can find their way from a screen to the database and back.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "development",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "subject",
+          "label": "Flow",
+          "type": "text",
+          "required": true,
+          "hint": "The flow it shows, in the user's words: \"Placing an order\"."
+        },
+        {
+          "name": "step",
+          "label": "Step",
+          "type": "text",
+          "required": false,
+          "hint": "The step of work that built it (for example a migration step), by its exact title."
+        },
+        {
+          "name": "overview",
+          "label": "Overview",
+          "type": "long-text",
+          "required": true,
+          "hint": "Where the flow starts and ends, who goes through it, and what is stored on the way."
+        },
+        {
+          "name": "participants",
+          "label": "Participants",
+          "type": "long-text",
+          "required": false,
+          "hint": "A table: each participant of the diagram, its file or package, and its part."
+        },
+        {
+          "name": "sequence",
+          "label": "Sequence",
+          "type": "plantuml",
+          "required": true,
+          "hint": "The PlantUML sequence diagram, drawn from the code as built: real class, method and endpoint names, `alt`/`opt`/`loop` for the branches, `==` dividers for the phases. A sentence before it says what it covers."
+        },
+        {
+          "name": "notes",
+          "label": "Notes",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the diagram leaves out: rules, transactions, error paths, the tests that cover the flow — a subsection each."
+        }
+      ],
+      "template": "",
+      "icon": "bi-diagram-3",
+      "states": []
+    }
+  ]
+}

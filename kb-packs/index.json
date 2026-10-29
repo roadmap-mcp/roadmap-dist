@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "development",
+      "name": "Development",
+      "version": "1.0.0",
+      "description": "For developers, often an AI, building the target application. Gives development areas, implementation records per step of work, project-wide guidelines and sequence diagrams drawn from the code as built.",
+      "author": "B2IT",
+      "personas": [
+        {
+          "id": "development",
+          "name": "Development"
+        }
+      ],
+      "node_types": [
+        {
+          "id": "development-area",
+          "name": "Development area",
+          "category": "folder",
+          "persona": "development"
+        },
+        {
+          "id": "implementation-record",
+          "name": "Implementation record",
+          "category": "topic",
+          "persona": "development"
+        },
+        {
+          "id": "guideline",
+          "name": "Guideline",
+          "category": "topic",
+          "persona": "development"
+        },
+        {
+          "id": "sequence-diagram",
+          "name": "Sequence diagram",
+          "category": "topic",
+          "persona": "development"
+        }
+      ],
+      "url": "development.json"
+    },
+    {
+      "id": "e2e-testing",
+      "name": "End-to-end testing (Playwright)",
+      "version": "1.0.0",
+      "description": "For testers verifying an application from the outside with Playwright. Gives test suites (one per spec file) and test scenarios derived from use cases, with given/when/then and their current status.",
+      "author": "B2IT",
+      "personas": [
+        {
+          "id": "testing",
+          "name": "Testing"
+        }
+      ],
+      "node_types": [
+        {
+          "id": "test-suite",
+          "name": "Test suite",
+          "category": "folder",
+          "persona": "testing"
+        },
+        {
+          "id": "test-scenario",
+          "name": "Test scenario",
+          "category": "topic",
+          "persona": "testing"
+        }
+      ],
+      "url": "e2e-testing.json"
+    },
+    {
+      "id": "functional-analysis",
+      "name": "Functional analysis",
+      "version": "1.0.0",
+      "description": "For business analysts documenting what an application does, independent of the technology it is built with. Gives functional areas, use cases, screen descriptions, use case diagrams and screen flows.",
+      "author": "B2IT",
+      "personas": [
+        {
+          "id": "analysis",
+          "name": "Analysis"
+        }
+      ],
+      "node_types": [
+        {
+          "id": "functional-area",
+          "name": "Functional area",
+          "category": "folder",
+          "persona": "analysis"
+        },
+        {
+          "id": "use-case",
+          "name": "Use case",
+          "category": "topic",
+          "persona": "analysis"
+        },
+        {
+          "id": "screen-description",
+          "name": "Screen description",
+          "category": "topic",
+          "persona": "analysis"
+        },
+        {
+          "id": "use-case-diagram",
+          "name": "Use case diagram",
+          "category": "topic",
+          "persona": "analysis"
+        },
+        {
+          "id": "screen-flow",
+          "name": "Screen flow",
+          "category": "topic",
+          "persona": "analysis"
+        }
+      ],
+      "url": "functional-analysis.json"
+    },
+    {
+      "id": "legacy-migration",
+      "name": "Legacy migration (Delphi to Java)",
+      "version": "1.0.0",
+      "description": "For technical designers moving a Delphi (VCL, Kylix or Lazarus) application to Java with Spring Boot and Angular. Gives topics that reverse engineer the existing forms, units and database, per-step migration designs, and a project, phase and step work breakdown with build order and status.",
+      "author": "B2IT",
+      "personas": [
+        {
+          "id": "technical-design",
+          "name": "Technical Design"
+        }
+      ],
+      "node_types": [
+        {
+          "id": "design-area",
+          "name": "Design area",
+          "category": "folder",
+          "persona": "technical-design"
+        },
+        {
+          "id": "screen-implementation",
+          "name": "Screen implementation",
+          "category": "topic",
+          "persona": "technical-design"
+        },
+        {
+          "id": "unit-implementation",
+          "name": "Unit implementation",
+          "category": "topic",
+          "persona": "technical-design"
+        },
+        {
+          "id": "database-design",
+          "name": "Database design",
+          "category": "topic",
+          "persona": "technical-design"
+        },
+        {
+          "id": "database-diagram",
+          "name": "Database diagram",
+          "category": "topic",
+          "persona": "technical-design"
+        },
+        {
+          "id": "migration-design",
+          "name": "Migration design",
+          "category": "topic",
+          "persona": "technical-design"
+        },
+        {
+          "id": "migration-project",
+          "name": "Migration project",
+          "category": "work",
+          "persona": ""
+        },
+        {
+          "id": "migration-phase",
+          "name": "Phase",
+          "category": "work",
+          "persona": ""
+        },
+        {
+          "id": "migration-step",
+          "name": "Migration step",
+          "category": "work",
+          "persona": ""
+        }
+      ],
+      "url": "legacy-migration.json"
+    },
+    {
+      "id": "primeng-specialist",
+      "name": "PrimeNG specialist",
+      "version": "1.0.0",
+      "description": "For teams building Angular screens with PrimeNG. Gives a persona and page types for distilling the PrimeNG documentation into sections, per-component pages and guides that designers, developers and testers can rely on.",
+      "author": "B2IT",
+      "personas": [
+        {
+          "id": "primeng-specialist",
+          "name": "PrimeNG specialist"
+        }
+      ],
+      "node_types": [
+        {
+          "id": "primeng-section",
+          "name": "PrimeNG section",
+          "category": "folder",
+          "persona": "primeng-specialist"
+        },
+        {
+          "id": "primeng-component",
+          "name": "PrimeNG component",
+          "category": "topic",
+          "persona": "primeng-specialist"
+        },
+        {
+          "id": "primeng-guide",
+          "name": "PrimeNG guide",
+          "category": "topic",
+          "persona": "primeng-specialist"
+        }
+      ],
+      "url": "primeng-specialist.json"
+    }
+  ]
+}

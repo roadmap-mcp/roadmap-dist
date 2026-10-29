@@ -1,0 +1,283 @@
+{
+  "format": 1,
+  "id": "functional-analysis",
+  "name": "Functional analysis",
+  "version": "1.0.0",
+  "status": "published",
+  "description": "For business analysts documenting what an application does, independent of the technology it is built with. Gives functional areas, use cases, screen descriptions, use case diagrams and screen flows.",
+  "author": "B2IT",
+  "personas": [
+    {
+      "id": "analysis",
+      "name": "Analysis",
+      "description": "The business analyst. Everything here is technology independent: what the application does and why, in terms that stay true whatever it is built with, and after any rewrite. No module names, no class names, no control names, no table names."
+    }
+  ],
+  "node_types": [
+    {
+      "id": "functional-area",
+      "name": "Functional area",
+      "description": "A group of use cases that belong together for the business, for example orders, customers, invoicing, or users and sign-in. The analyst's tree is browsed by these, so every use case sits in exactly one of them. The folder itself carries the overview of its area.",
+      "form": "unstructured",
+      "category": "folder",
+      "persona": "analysis",
+      "parent_type": "",
+      "fields": [],
+      "template": "",
+      "icon": "bi-diagram-3",
+      "states": []
+    },
+    {
+      "id": "use-case",
+      "name": "Use case",
+      "description": "One thing a user can achieve with the application, written so it would still be true if the application were rebuilt in any language. When it is derived from existing screens and code, it is never phrased in their terms: no module names, no class names, no control names, no table names. A screen that only exists to pick a value for another screen is a step of that use case, not a use case of its own.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "analysis",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "actor",
+          "label": "Actor",
+          "type": "text",
+          "required": true,
+          "hint": "Who carries it out, as a role rather than a person or a form."
+        },
+        {
+          "name": "goal",
+          "label": "Goal",
+          "type": "text",
+          "required": true,
+          "hint": "What the actor is trying to achieve, in business terms."
+        },
+        {
+          "name": "trigger",
+          "label": "Trigger",
+          "type": "text",
+          "required": false,
+          "hint": "What makes it start: a decision, an event, a schedule."
+        },
+        {
+          "name": "preconditions",
+          "label": "Preconditions",
+          "type": "long-text",
+          "required": false,
+          "hint": "What has to be true before it can run, including who is allowed to."
+        },
+        {
+          "name": "main_flow",
+          "label": "Main flow",
+          "type": "long-text",
+          "required": true,
+          "hint": "The normal course as numbered steps, one step per thing the actor or the system does. Say what happens, not which control is clicked."
+        },
+        {
+          "name": "alternate_flows",
+          "label": "Alternate flows",
+          "type": "long-text",
+          "required": false,
+          "hint": "The variations and what happens when it goes wrong, each with the condition that leads into it."
+        },
+        {
+          "name": "business_rules",
+          "label": "Business rules",
+          "type": "long-text",
+          "required": false,
+          "hint": "The rules the system enforces here, written so they could be handed to a developer who has never seen the existing code."
+        },
+        {
+          "name": "data",
+          "label": "Data involved",
+          "type": "long-text",
+          "required": false,
+          "hint": "The business things it reads and changes, in business words. A customer, an order, a role: not a table."
+        },
+        {
+          "name": "outcome",
+          "label": "Outcome",
+          "type": "long-text",
+          "required": false,
+          "hint": "What is true once it has finished, including what the user is told."
+        },
+        {
+          "name": "open_questions",
+          "label": "Open questions",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the code did not make clear. Put it here rather than inventing an intent; this is the list the analyst takes to the business."
+        }
+      ],
+      "template": "",
+      "icon": "bi-person-check",
+      "states": []
+    },
+    {
+      "id": "screen-description",
+      "name": "Screen description",
+      "description": "One screen as the business analyst sees it: what a user comes to it for, what it shows and what it lets them do, written so it would still be true after a rewrite. When it is derived from an existing screen, it is never phrased in its terms: no module names, no class names, no control names, no table names. A dialog that only exists to pick a value for another screen is described as part of the screen that opens it, not as a screen of its own.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "analysis",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "use_case",
+          "label": "Use case",
+          "type": "text",
+          "required": true,
+          "hint": "The use case this screen is a step of, by its exact title. When it serves several, give each title separated by \"; \"."
+        },
+        {
+          "name": "purpose",
+          "label": "Purpose",
+          "type": "long-text",
+          "required": true,
+          "hint": "What the user comes to this screen to do, in business terms."
+        },
+        {
+          "name": "users",
+          "label": "Used by",
+          "type": "text",
+          "required": false,
+          "hint": "Who works with it, as roles rather than people or logins."
+        },
+        {
+          "name": "information_shown",
+          "label": "Information shown",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the user sees, as business information: which customer, which order, which totals. Not fields, grids or tabs."
+        },
+        {
+          "name": "user_actions",
+          "label": "What the user can do",
+          "type": "long-text",
+          "required": true,
+          "hint": "Each thing the user can do here and what it achieves. Say what happens, not which button is clicked."
+        },
+        {
+          "name": "navigation",
+          "label": "Comes from / leads to",
+          "type": "long-text",
+          "required": false,
+          "hint": "Where the user arrives from and where they can go next, as steps in their work rather than menu paths."
+        },
+        {
+          "name": "rules",
+          "label": "Rules the user meets",
+          "type": "long-text",
+          "required": false,
+          "hint": "What is mandatory, what is refused and what the user is told, in words a developer could implement without the existing code."
+        },
+        {
+          "name": "open_questions",
+          "label": "Open questions",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the code did not make clear. Put it here rather than inventing an intent."
+        }
+      ],
+      "template": "",
+      "icon": "bi-window",
+      "states": []
+    },
+    {
+      "id": "use-case-diagram",
+      "name": "Use case diagram",
+      "description": "A picture of who uses the system for what: the actors (job positions, outside parties) and the use cases they take part in, grouped by functional area, with how the use cases depend on each other (include, extend, one leading into the next). Drawn from the use case topics it shows, in the business's words, so a reader sees the whole before opening one use case.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "analysis",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "scope",
+          "label": "Scope",
+          "type": "text",
+          "required": true,
+          "hint": "What it covers: a functional area by its name, or \"the whole system\"."
+        },
+        {
+          "name": "overview",
+          "label": "Overview",
+          "type": "long-text",
+          "required": true,
+          "hint": "What the diagram shows and what it leaves out, in a few sentences."
+        },
+        {
+          "name": "actors",
+          "label": "Actors",
+          "type": "long-text",
+          "required": false,
+          "hint": "A table: each actor, who that is in the business, and what they may do."
+        },
+        {
+          "name": "diagram",
+          "label": "Diagram",
+          "type": "plantuml",
+          "required": true,
+          "hint": "A PlantUML use case diagram: actors on the left, the use cases by their exact titles inside the system boundary, one package per functional area (use cases from neighbouring areas in grey), <<include>>/<<extend>> where one use case depends on another. A sentence before it says how to read it."
+        },
+        {
+          "name": "notes",
+          "label": "Notes",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the picture cannot say: rules about who may do what, gaps and open questions about roles — a subsection each."
+        }
+      ],
+      "template": "",
+      "icon": "bi-people",
+      "states": []
+    },
+    {
+      "id": "screen-flow",
+      "name": "Screen flow",
+      "description": "How a user moves between the screens: where each screen is reached from, which action leads where, and where the user ends up after signing out or finishing a task. Drawn from the screen description topics (their \"comes from / leads to\"), so a reader sees the whole application, or one journey through it, at a glance.",
+      "form": "structured",
+      "category": "topic",
+      "persona": "analysis",
+      "parent_type": "",
+      "fields": [
+        {
+          "name": "scope",
+          "label": "Scope",
+          "type": "text",
+          "required": true,
+          "hint": "What it covers: \"the whole application\", or a journey (\"placing and invoicing an order\")."
+        },
+        {
+          "name": "overview",
+          "label": "Overview",
+          "type": "long-text",
+          "required": true,
+          "hint": "Where the flow starts, the main routes through it, and what it leaves out."
+        },
+        {
+          "name": "screens",
+          "label": "Screens",
+          "type": "long-text",
+          "required": false,
+          "hint": "A table: each screen in the flow, who uses it, and its screen description."
+        },
+        {
+          "name": "flow",
+          "label": "Flow",
+          "type": "mermaid",
+          "required": true,
+          "hint": "A Mermaid flowchart: one node per screen by its name, its functional area under the name, coloured by who uses it, each arrow labelled with the user action (or the condition) that takes the user there; dotted arrows for routes that are offered but broken. A sentence before it says how to read it."
+        },
+        {
+          "name": "notes",
+          "label": "Notes",
+          "type": "long-text",
+          "required": false,
+          "hint": "What the picture cannot say: dead ends, lost data on leaving, open questions about navigation — a subsection each."
+        }
+      ],
+      "template": "",
+      "icon": "bi-arrow-left-right",
+      "states": []
+    }
+  ]
+}
