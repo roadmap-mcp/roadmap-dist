@@ -2,15 +2,15 @@
   "format": 1,
   "id": "legacy-migration",
   "name": "Legacy migration (Delphi to Java)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "status": "published",
   "description": "For technical designers moving a Delphi (VCL, Kylix or Lazarus) application to Java with Spring Boot and Angular. Gives topics that reverse engineer the existing forms, units and database, per-step migration designs, and a project, phase and step work breakdown with build order and status.",
   "author": "B2IT",
   "personas": [
     {
       "id": "technical-design",
-      "name": "Technical Design",
-      "description": "The technical designer, reverse engineering the Delphi (VCL) implementation that exists today. Everything here is deliberately technology specific: which unit, which form class, which component, which query, which table. This is the record of what has to be replaced, and what the Java design has to account for."
+      "name": "Technical design",
+      "description": "The technical designer, reverse engineering the Delphi (VCL, Kylix or Lazarus) implementation that exists today. Everything here is deliberately technology specific: which unit, which form class, which component, which query, which table. This is the record of what has to be replaced, and what the Java design has to account for."
     }
   ],
   "node_types": [
