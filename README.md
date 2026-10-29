@@ -20,6 +20,6 @@ To be released soon.
 
 ## Plugins
 
-- [`registry.json`](registry.json) — the plugin index; the app's Settings → Admin
-  installs plugins listed here.
+- [`registry/pro.json`](registry/pro.json) — the plugins published for Pro; the app's
+  Settings → System → Admin installs the ones not bundled (such as Trello) from here.
 - `plugins/*.whl` — the plugin wheels.

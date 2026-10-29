@@ -6,6 +6,7 @@
       "id": "roadmap.ai",
       "name": "AI",
       "version": "0.1.0",
+      "status": "published",
       "description": "AI providers / proxy / tasks configuration + provider connection testing.",
       "author": "B2IT",
       "requires": [
@@ -28,6 +29,7 @@
       "id": "roadmap.atlassian",
       "name": "Atlassian (Jira + Confluence datasource)",
       "version": "0.1.0",
+      "status": "published",
       "description": "Owns the Jira/Confluence config, HTTP client, cache, and browse endpoints; publishes the 'atlassian' service consumed by the jira context-item plugin and the brain Atlassian source.",
       "author": "B2IT",
       "requires": [
@@ -50,6 +52,7 @@
       "id": "roadmap.bitbucket",
       "name": "Bitbucket",
       "version": "0.1.0",
+      "status": "published",
       "description": "Adds Bitbucket pull requests as a context item type, with its own connection settings and token test.",
       "author": "B2IT",
       "requires": [
@@ -81,6 +84,7 @@
       "id": "roadmap.context",
       "name": "Contexts",
       "version": "0.1.0",
+      "status": "published",
       "description": "Context extension points — item types + preview contributions, /api/contexts, and the MCP server.",
       "author": "B2IT",
       "requires": [
@@ -120,6 +124,7 @@
       "id": "roadmap.folderpicker",
       "name": "Folder Picker",
       "version": "0.1.0",
+      "status": "published",
       "description": "Native local folder-selection dialog + subfolder listing (single-user / desktop; omit for server/Team profiles).",
       "author": "B2IT",
       "requires": [],
@@ -135,6 +140,7 @@
       "id": "roadmap.jira",
       "name": "Jira / Confluence context items",
       "version": "0.2.0",
+      "status": "published",
       "description": "Contributes the jira_issue / confluence_page context item types + previews + MCP tools, consuming the atlassian datasource service.",
       "author": "B2IT",
       "requires": [
@@ -162,6 +168,7 @@
       "id": "roadmap.jobs",
       "name": "Jobs",
       "version": "0.1.0",
+      "status": "published",
       "description": "Generic async job registry: durable background jobs with status + an incremental log, a reusable run_async helper (daemon thread + workspace re-pin), and a /api/jobs monitor. Mined-data-style swappable persistence (roadmap.jobs.persistence) — built-in SQLite (default) and filesystem, satellites can add Postgres/SQL-Server. Used by any plugin that runs background work (e.g. git mining).",
       "author": "B2IT",
       "requires": [
@@ -189,6 +196,7 @@
       "id": "roadmap.knowledgebase",
       "name": "Knowledge Base",
       "version": "0.1.0",
+      "status": "published",
       "description": "AI-backed Knowledge Base. Two layers: a ground-truth layer that ingests the organisation's information sources into one graph of nodes and links, and (later) a knowledge layer of persona-specific topics written and maintained by AI agents. This plugin is layer 1 plus the persona list the knowledge layer will write for. It replaces the earlier Company Brain plugin, which is being retired — nothing here depends on it.",
       "author": "B2IT",
       "requires": [
@@ -216,6 +224,7 @@
       "id": "roadmap.knowledgebase.flows",
       "name": "Knowledge Base — flow runner",
       "version": "0.1.0",
+      "status": "published",
       "description": "Runs Knowledge Base flows on the server: reads the flow's source, asks the configured AI provider, validates the answer against the node types and writes it into the graph with its provenance. Without it the Knowledge Base still has flows — it hands out briefs for an external AI to carry out; this plugin is what lets Roadmap do the thinking itself. Contributes the source-reader extension point and its three built-in readers, and a scheduled task that starts a flow when its source has moved.",
       "author": "B2IT",
       "requires": [
@@ -249,6 +258,7 @@
       "id": "roadmap.scheduler",
       "name": "Scheduler",
       "version": "0.1.0",
+      "status": "published",
       "description": "Generic periodic-task scheduler: plugins contribute a run() callable to roadmap.scheduler.tasks and a central config (this plugin's) sets each task's cron + enabled. One workspace-aware background loop fires due tasks with the workspace pinned and only while the app is unlocked. Stops plugins reinventing their own schedulers.",
       "author": "B2IT",
       "requires": [
@@ -276,6 +286,7 @@
       "id": "roadmap.settings",
       "name": "Settings",
       "version": "0.1.0",
+      "status": "published",
       "description": "Settings extension point — lets plugins contribute configuration sections.",
       "author": "B2IT",
       "requires": [],
@@ -296,6 +307,7 @@
       "id": "roadmap.trello",
       "name": "Trello",
       "version": "0.1.0",
+      "status": "published",
       "description": "Adds Trello cards as a context item type, with connection settings, configured boards and MCP tools.",
       "author": "B2IT",
       "requires": [
