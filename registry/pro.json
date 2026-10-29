@@ -80,22 +80,6 @@
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_bitbucket-0.1.0-py3-none-any.whl"
     },
     {
-      "id": "roadmap.folderpicker",
-      "name": "Folder Picker",
-      "version": "0.1.0",
-      "status": "published",
-      "description": "A native folder dialog and a subfolder listing on the machine Roadmap runs on: Browse and Import for Git Repos. For a single-user install on a desktop; on a server, type paths instead.",
-      "author": "B2IT",
-      "requires": [],
-      "extensionPoints": {
-        "defines": [],
-        "implements": []
-      },
-      "package": "roadmap-plugin-folderpicker",
-      "wheel": "roadmap_plugin_folderpicker-0.1.0-py3-none-any.whl",
-      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_folderpicker-0.1.0-py3-none-any.whl"
-    },
-    {
       "id": "roadmap.gitrepos",
       "name": "Git Repos",
       "version": "0.1.0",
