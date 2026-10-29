@@ -84,7 +84,7 @@
       "name": "Git Repos",
       "version": "0.1.0",
       "status": "published",
-      "description": "The local git working copies this installation reads: a name, a path and tags each, under Settings -> Information Sources -> Git Repos. In Pro they are inputs to the knowledge base (flows read them); in Lite, contexts add them as items. Publishes the git_repos service and the list_git_repos / get_git_repo_info MCP tools.",
+      "description": "The local git working copies this installation reads: a name and a folder each, under a checkout folder on the server or on users' machines (Settings -> Information Sources -> Git Repos). In Pro they are inputs to the knowledge base (flows read them); in Lite, contexts add them as items. Publishes the git_repos service and the list_git_repos / get_git_repo_info MCP tools.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings",
