@@ -30,7 +30,7 @@
       "name": "Atlassian (Jira + Confluence datasource)",
       "version": "0.1.0",
       "status": "published",
-      "description": "Owns the Jira/Confluence config, HTTP client, cache, and browse endpoints; publishes the 'atlassian' service consumed by the jira context-item plugin and the brain Atlassian source.",
+      "description": "The Jira and Confluence connection: its settings under Information Sources (a Layer 1 source for the knowledge base), the HTTP client and cache, and browse endpoints. Publishes the 'atlassian' service other plugins read Jira and Confluence through; the knowledge base uses it to open and refresh Jira issue and Confluence page nodes.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings"
@@ -84,7 +84,7 @@
       "name": "Folder Picker",
       "version": "0.1.0",
       "status": "published",
-      "description": "Native local folder-selection dialog + subfolder listing (single-user / desktop; omit for server/Team profiles).",
+      "description": "A native folder dialog and a subfolder listing on the machine Roadmap runs on: Browse and Import for Git Repos. For a single-user install on a desktop; on a server, type paths instead.",
       "author": "B2IT",
       "requires": [],
       "extensionPoints": {
@@ -124,7 +124,7 @@
       "name": "Jobs",
       "version": "0.1.0",
       "status": "published",
-      "description": "Generic async job registry: durable background jobs with status + an incremental log, a reusable run_async helper (daemon thread + workspace re-pin), and a /api/jobs monitor. Mined-data-style swappable persistence (roadmap.jobs.persistence) — built-in SQLite (default) and filesystem, satellites can add Postgres/SQL-Server. Used by any plugin that runs background work (e.g. git mining).",
+      "description": "Background jobs: durable records with status and an incremental log, a run_async helper that keeps the workspace a job was started in, and a /api/jobs monitor under Settings -> System -> Jobs. Storage is swappable (roadmap.jobs.persistence): SQLite (the default) or the file system. Used by any plugin that runs work in the background, such as the knowledge base flow runner.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings"
@@ -152,7 +152,7 @@
       "name": "Knowledge Base",
       "version": "0.1.0",
       "status": "published",
-      "description": "AI-backed Knowledge Base. Two layers: a ground-truth layer that ingests the organisation's information sources into one graph of nodes and links, and (later) a knowledge layer of persona-specific topics written and maintained by AI agents. This plugin is layer 1 plus the persona list the knowledge layer will write for. It replaces the earlier Company Brain plugin, which is being retired — nothing here depends on it.",
+      "description": "The Knowledge Base: a ground-truth graph over the information sources this installation reads (Layer 1), and topics written for personas on top of it (Layer 2), defined by node types and installable from packs. Flows are configured paths into it, carried out by an AI over MCP or on the server; orchestrations run flows as a state machine; branches hold a feature's work until it is merged. Has its own page and settings group, and the kb_* MCP tools.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings",
@@ -163,11 +163,7 @@
         "implements": [
           {
             "point": "roadmap.settings.sections",
-            "detail": "Knowledge Base settings group: Sources (which information sources feed the ground layer) and Personas (who the knowledge layer writes for)."
-          },
-          {
-            "point": "context.mcp",
-            "detail": "kb_read / kb_write / kb_admin — three action-based tools grouped by role: query the graph, change it, and administer its node types."
+            "detail": "Knowledge Base settings group: Layer 1 (sources), Layer 2 (personas, node types, packs), Flows, Orchestration."
           }
         ]
       },
@@ -191,7 +187,7 @@
         "defines": [
           {
             "point": "roadmap.knowledgebase.flows.readers",
-            "detail": "FlowReader — turns a flow's source into the material its prompt is built from. Built-ins: repo (a configured Git Repo's working tree), kb_source (nodes already in the graph), context (a Roadmap context)."
+            "detail": "FlowReader — turns a flow's source into the material its prompt is built from. Built-ins: repo (a configured Git Repo's working tree), kb_source (nodes already in the graph), and context where Contexts is installed."
           }
         ],
         "implements": [
