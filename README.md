@@ -1,12 +1,25 @@
 # Roadmap — downloads
 
-Public distribution for **Roadmap Personal Edition**. Built from the (private)
-Roadmap monorepo and published here.
+Public distribution for **Roadmap**. Built from the (private)
+Roadmap monorepo and published here. Documentation: <https://docs.roadmap-mcp.com/>.
 
-- **Installer:** [`install/roadmap-pe.zip`](install/roadmap-pe.zip) — unzip and run
-  `start.bat` (Windows) / `start.sh` (macOS/Linux). Requires Python 3.13+.
-- **Plugin registry:** [`registry.json`](registry.json) — the app's Admin section
+## Roadmap Pro
+
+[Download `install/roadmap-pro.zip`](https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/install/roadmap-pro.zip)
+— version `0.2.0-SNAPSHOT`.
+
+Requires Python 3.13+ on your PATH. Unzip anywhere and run `start.bat` (Windows) or
+`bash start.sh` (macOS/Linux). The first run sets up a local environment and installs
+the bundled plugins, which takes a few minutes; then the app is at
+<http://localhost:8090>. MCP clients connect over SSE at
+`http://127.0.0.1:8090/mcp/sse`.
+
+## Roadmap Lite
+
+To be released soon.
+
+## Plugins
+
+- [`registry.json`](registry.json) — the plugin index; the app's Settings → Admin
   installs plugins listed here.
-- **Plugins:** `plugins/*.whl`.
-
-Current version: `0.1.0`.
+- `plugins/*.whl` — the plugin wheels.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedFor": "0.1.0",
+  "generatedFor": "0.2.0-SNAPSHOT",
   "plugins": [
     {
       "id": "roadmap.ai",
@@ -25,12 +25,67 @@
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_ai-0.1.0-py3-none-any.whl"
     },
     {
+      "id": "roadmap.atlassian",
+      "name": "Atlassian (Jira + Confluence datasource)",
+      "version": "0.1.0",
+      "description": "Owns the Jira/Confluence config, HTTP client, cache, and browse endpoints; publishes the 'atlassian' service consumed by the jira context-item plugin and the brain Atlassian source.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Atlassian (Jira + Confluence) settings tab."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-atlassian",
+      "wheel": "roadmap_plugin_atlassian-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_atlassian-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.bitbucket",
+      "name": "Bitbucket",
+      "version": "0.1.0",
+      "description": "Adds Bitbucket pull requests as a context item type, with its own connection settings and token test.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Bitbucket connection settings + token test."
+          },
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "bitbucket_pr item type."
+          },
+          {
+            "point": "roadmap.context.previewContributions",
+            "detail": "Bitbucket pull-request preview."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-bitbucket",
+      "wheel": "roadmap_plugin_bitbucket-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_bitbucket-0.1.0-py3-none-any.whl"
+    },
+    {
       "id": "roadmap.context",
       "name": "Contexts",
       "version": "0.1.0",
       "description": "Context extension points — item types + preview contributions, /api/contexts, and the MCP server.",
       "author": "B2IT",
-      "requires": [],
+      "requires": [
+        "roadmap.settings"
+      ],
       "extensionPoints": {
         "defines": [
           {
@@ -45,11 +100,15 @@
         "implements": [
           {
             "point": "roadmap.context.itemTypes",
-            "detail": "Built-in item types (instructions, scratch_dir, mixin, url, git_repo, repo_file, commits)."
+            "detail": "Built-in item types (instructions, mixin, url, git_repo, repo_file, commits)."
           },
           {
             "point": "roadmap.context.previewContributions",
             "detail": "Built-in preview renderers."
+          },
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Git Repos tab (repositories)."
           }
         ]
       },
@@ -58,16 +117,108 @@
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_context-0.1.0-py3-none-any.whl"
     },
     {
+      "id": "roadmap.contextassistant",
+      "name": "Context Assistant",
+      "version": "0.1.0",
+      "description": "AI assistant that proposes context items, tags, and a description from a chat message (Jira-enriched when the Jira plugin is installed).",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.context",
+        "roadmap.ai"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": []
+      },
+      "package": "roadmap-plugin-context-assistant",
+      "wheel": "roadmap_plugin_context_assistant-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_context_assistant-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.e2e",
+      "name": "Web Testing",
+      "version": "0.1.0",
+      "description": "End-to-end web test engine: reusable steps grouped into pages (page-object pattern), composed into scenarios, executed in test runs with a parameter context, producing a step-through report. Driver-agnostic (declares roadmap.e2e.drivers); ships a browser-free mock driver.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.e2e.drivers",
+            "detail": "Test drivers that perform a step against a target (browser, API, …)."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Web Testing settings tab."
+          },
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "e2e_run — pin a test-run report into a context."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-e2e",
+      "wheel": "roadmap_plugin_e2e-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_e2e-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.e2e.assistant",
+      "name": "Web Testing — AI design assistant",
+      "version": "0.1.0",
+      "description": "Build E2E test components by talking to an AI that drives a live browser: it sees the page (elements + real selectors), performs your instructions, records them as steps, and saves a reusable Component. Serves /api/e2e-assistant; backs the immersive AI Test Design view.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.e2e",
+        "roadmap.ai",
+        "roadmap.context"
+      ],
+      "extensionPoints": {},
+      "package": "roadmap-plugin-e2e-assistant",
+      "wheel": "roadmap_plugin_e2e_assistant-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_e2e_assistant-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.e2e.selenium",
+      "name": "Web Testing — Selenium driver",
+      "version": "0.1.0",
+      "description": "Selenium web driver for the Roadmap E2E engine. Maps structured actions onto Selenium and runs raw `script` snippets against the live browser. Local headless Chrome via Selenium Manager, or a remote WebDriver / Grid via e2e.remote_url.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.e2e"
+      ],
+      "extensionPoints": {
+        "implements": [
+          {
+            "point": "roadmap.e2e.drivers",
+            "detail": "selenium driver (Chrome / remote Grid)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-e2e-selenium",
+      "wheel": "roadmap_plugin_e2e_selenium-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_e2e_selenium-0.1.0-py3-none-any.whl"
+    },
+    {
       "id": "roadmap.fileviewer",
       "name": "File Viewers",
       "version": "0.1.0",
-      "description": "File viewer plugin (browse-dir API + PlantUML/markdown/image viewers + settings).",
+      "description": "Viewer host — directory browsing (browse-dir API) and the roadmap.viewers extension point that per-file-type viewer plugins contribute to.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings"
       ],
       "extensionPoints": {
-        "defines": [],
+        "defines": [
+          {
+            "point": "roadmap.viewers",
+            "description": "A file viewer contributed by a viewer plugin, keyed by extension."
+          }
+        ],
         "implements": [
           {
             "point": "roadmap.settings.sections",
@@ -80,22 +231,92 @@
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_fileviewer-0.1.0-py3-none-any.whl"
     },
     {
-      "id": "roadmap.jira",
-      "name": "Jira / Atlassian",
+      "id": "roadmap.folderpicker",
+      "name": "Folder Picker",
       "version": "0.1.0",
-      "description": "Jira/Atlassian implementation of the settings + context extension points.",
+      "description": "Native local folder-selection dialog + subfolder listing (single-user / desktop; omit for server/Team profiles).",
+      "author": "B2IT",
+      "requires": [],
+      "extensionPoints": {
+        "defines": [],
+        "implements": []
+      },
+      "package": "roadmap-plugin-folderpicker",
+      "wheel": "roadmap_plugin_folderpicker-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_folderpicker-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.gitdiff",
+      "name": "Git Diff Viewer",
+      "version": "0.1.0",
+      "description": "Working-directory diff viewer for a context's git_repo item: a changed-file tree with +/- counts, filtering, and a syntax-coloured hunk view. Reached via the arrow on a git_repo context item.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": []
+      },
+      "package": "roadmap-plugin-gitdiff",
+      "wheel": "roadmap_plugin_gitdiff-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_gitdiff-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.gitmining",
+      "name": "Git Mining",
+      "version": "0.1.0",
+      "description": "Git repo mining engine on a generic unit-of-work model: server-managed repositories (remote URL + tracked branches the server clones itself), scheduled scanning, and pluggable processors. Mined data is generic WorkItems (git_commit, branch, and later pull_request / jira_issue) connected by relations, persisted behind an extension point (roadmap.gitmining.persistence — SQLite default / filesystem / satellites). Work items come from sources (roadmap.gitmining.sources — built-in git). Distinct from the local-development git repos owned by the context plugin.",
       "author": "B2IT",
       "requires": [
         "roadmap.settings",
+        "roadmap.context",
+        "roadmap.jobs",
+        "roadmap.scheduler"
+      ],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.gitmining.persistence",
+            "detail": "Persistence backends that store work items, relations, processor results, and source cursors (SQLite, filesystem, …)."
+          },
+          {
+            "point": "roadmap.gitmining.sources",
+            "detail": "Sources of work items — git commits + branches built-in; pull requests, Jira issues, … as satellites."
+          },
+          {
+            "point": "roadmap.gitmining.processors",
+            "detail": "Processors that extract structured data from a work item (declaring which item types they handle)."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Git Mining settings tab (persistence choice, credentials, processors)."
+          },
+          {
+            "point": "roadmap.scheduler.tasks",
+            "detail": "gitmining.scan — periodic fetch + ingest of changed branches."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-gitmining",
+      "wheel": "roadmap_plugin_gitmining-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_gitmining-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.jira",
+      "name": "Jira / Confluence context items",
+      "version": "0.2.0",
+      "description": "Contributes the jira_issue / confluence_page context item types + previews + MCP tools, consuming the atlassian datasource service.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.atlassian",
         "roadmap.context"
       ],
       "extensionPoints": {
         "defines": [],
         "implements": [
-          {
-            "point": "roadmap.settings.sections",
-            "detail": "Atlassian (Jira + Confluence) settings tab."
-          },
           {
             "point": "roadmap.context.itemTypes",
             "detail": "confluence_page, jira_issue item types."
@@ -107,8 +328,171 @@
         ]
       },
       "package": "roadmap-plugin-jira",
-      "wheel": "roadmap_plugin_jira-0.1.0-py3-none-any.whl",
-      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_jira-0.1.0-py3-none-any.whl"
+      "wheel": "roadmap_plugin_jira-0.2.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_jira-0.2.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.jobs",
+      "name": "Jobs",
+      "version": "0.1.0",
+      "description": "Generic async job registry: durable background jobs with status + an incremental log, a reusable run_async helper (daemon thread + workspace re-pin), and a /api/jobs monitor. Mined-data-style swappable persistence (roadmap.jobs.persistence) — built-in SQLite (default) and filesystem, satellites can add Postgres/SQL-Server. Used by any plugin that runs background work (e.g. git mining).",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.jobs.persistence",
+            "detail": "Persistence backends that store background job records (SQLite, filesystem, …)."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Jobs settings tab (persistence choice)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-jobs",
+      "wheel": "roadmap_plugin_jobs-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_jobs-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.knowledgebase",
+      "name": "Knowledge Base",
+      "version": "0.1.0",
+      "description": "AI-backed Knowledge Base. Two layers: a ground-truth layer that ingests the organisation's information sources into one graph of nodes and links, and (later) a knowledge layer of persona-specific topics written and maintained by AI agents. This plugin is layer 1 plus the persona list the knowledge layer will write for. It replaces the earlier Company Brain plugin, which is being retired — nothing here depends on it.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Knowledge Base settings group: Sources (which information sources feed the ground layer) and Personas (who the knowledge layer writes for)."
+          },
+          {
+            "point": "context.mcp",
+            "detail": "kb_read / kb_write / kb_admin — three action-based tools grouped by role: query the graph, change it, and administer its node types."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-knowledgebase",
+      "wheel": "roadmap_plugin_knowledgebase-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_knowledgebase-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.knowledgebase.flows",
+      "name": "Knowledge Base — flow runner",
+      "version": "0.1.0",
+      "description": "Runs Knowledge Base flows on the server: reads the flow's source, asks the configured AI provider, validates the answer against the node types and writes it into the graph with its provenance. Without it the Knowledge Base still has flows — it hands out briefs for an external AI to carry out; this plugin is what lets Roadmap do the thinking itself. Contributes the source-reader extension point and its three built-in readers, and a scheduled task that starts a flow when its source has moved.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.knowledgebase",
+        "roadmap.ai",
+        "roadmap.jobs"
+      ],
+      "extensionPoints": {
+        "provides": [
+          {
+            "point": "roadmap.knowledgebase.flows.readers",
+            "detail": "FlowReader — turns a flow's source into the material its prompt is built from. Built-ins: repo (a configured Git Repo's working tree), kb_source (nodes already in the graph), context (a Roadmap context)."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.ai.taskTypes",
+            "detail": "knowledge_flow AI task type."
+          },
+          {
+            "point": "roadmap.scheduler.tasks",
+            "detail": "knowledgebase.flows.scan — start the flows whose source has moved."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-knowledgebase-flows",
+      "wheel": "roadmap_plugin_knowledgebase_flows-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_knowledgebase_flows-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.mockup",
+      "name": "Mockups",
+      "version": "0.1.0",
+      "description": "Mock-UI designer: create projects and screens, edit each screen in a Balsamiq-style wireframe editor (drag/drop widget palette + property panel), and wire screens into click-through flows. Self-contained; stores JSON under <config_dir>/mockups/.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Mockups settings tab (canvas defaults)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-mockup",
+      "wheel": "roadmap_plugin_mockup-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_mockup-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.scheduler",
+      "name": "Scheduler",
+      "version": "0.1.0",
+      "description": "Generic periodic-task scheduler: plugins contribute a run() callable to roadmap.scheduler.tasks and a central config (this plugin's) sets each task's cron + enabled. One workspace-aware background loop fires due tasks with the workspace pinned and only while the app is unlocked. Stops plugins reinventing their own schedulers.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.scheduler.tasks",
+            "detail": "Periodic tasks (id + run callable) the scheduler fires on their configured cron."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Scheduler settings tab (the central per-task cron + enabled)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-scheduler",
+      "wheel": "roadmap_plugin_scheduler-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_scheduler-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.scratchdir",
+      "name": "Scratch Directories",
+      "version": "0.1.0",
+      "description": "Contributes the scratch_dir context item type — a working directory for AI-generated files (docs, diagrams, scripts).",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.context",
+        "roadmap.settings"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "scratch_dir item type + default-path endpoint."
+          },
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Context tab (scratch base directory)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-scratchdir",
+      "wheel": "roadmap_plugin_scratchdir-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_scratchdir-0.1.0-py3-none-any.whl"
     },
     {
       "id": "roadmap.settings",
@@ -131,6 +515,103 @@
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_settings-0.1.0-py3-none-any.whl"
     },
     {
+      "id": "roadmap.trello",
+      "name": "Trello",
+      "version": "0.1.0",
+      "description": "Adds Trello cards as a context item type, with connection settings, configured boards and MCP tools.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Trello connection settings, token test and configured boards."
+          },
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "trello_card item type."
+          },
+          {
+            "point": "roadmap.context.previewContributions",
+            "detail": "Trello card and board-cards previews."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-trello",
+      "wheel": "roadmap_plugin_trello-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_trello-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.viewer.image",
+      "name": "Image Viewer",
+      "version": "0.1.0",
+      "description": "Views image files (png, jpg, gif, bmp, webp, svg, ico) with zoom / pan / minimap.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.fileviewer"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.viewers",
+            "detail": "Image viewer (kind: image) for common raster/vector formats."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-viewer-image",
+      "wheel": "roadmap_plugin_viewer_image-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_viewer_image-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.viewer.markdown",
+      "name": "Markdown Viewer",
+      "version": "0.1.0",
+      "description": "Renders .md / .markdown files as formatted HTML in the file browser.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.fileviewer"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.viewers",
+            "detail": ".md / .markdown viewer (kind: markdown)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-viewer-markdown",
+      "wheel": "roadmap_plugin_viewer_markdown-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_viewer_markdown-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.viewer.plantuml",
+      "name": "PlantUML Viewer",
+      "version": "0.1.0",
+      "description": "Renders .puml diagrams via a PlantUML server (plantuml.org by default). Contributes a file viewer for the .puml extension.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.fileviewer"
+      ],
+      "extensionPoints": {
+        "defines": [],
+        "implements": [
+          {
+            "point": "roadmap.viewers",
+            "detail": ".puml file viewer (kind: plantuml) + /api/viewer/plantuml/url."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-viewer-plantuml",
+      "wheel": "roadmap_plugin_viewer_plantuml-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_viewer_plantuml-0.1.0-py3-none-any.whl"
+    },
+    {
       "id": "roadmap.whisper",
       "name": "Whisper",
       "version": "0.1.0",
@@ -151,6 +632,103 @@
       "package": "roadmap-plugin-whisper",
       "wheel": "roadmap_plugin_whisper-0.1.0-py3-none-any.whl",
       "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_whisper-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.workflow",
+      "name": "Workflows",
+      "version": "0.1.0",
+      "description": "Workflow automation engine: reusable step definitions (single-step templates, partially filled), composed into flows and invoked as live step-by-step invocations with a parameter context and an AI-blind credentials vault. Executor-agnostic (declares roadmap.workflow.executors); ships built-in http/shell/python/readdir executors plus a browser-free mock executor.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.settings",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "defines": [
+          {
+            "point": "roadmap.workflow.executors",
+            "detail": "Executors that perform one resolved step against a target (HTTP, shell, filesystem, browser, …)."
+          }
+        ],
+        "implements": [
+          {
+            "point": "roadmap.settings.sections",
+            "detail": "Workflows settings tab."
+          },
+          {
+            "point": "roadmap.context.itemTypes",
+            "detail": "workflow_invocation — pin a flow-invocation report into a context."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-workflow",
+      "wheel": "roadmap_plugin_workflow-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_workflow-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.workflow.activemq",
+      "name": "Workflows — ActiveMQ executor",
+      "version": "0.1.0",
+      "description": "ActiveMQ executor for the Roadmap workflow engine. Publishes a message via ActiveMQ Classic's REST API (POST /api/message) — destination + JMS properties as query params, Basic auth from the credentials vault (AI-blind), CSRF-cookie priming. No JMS/STOMP client needed. Contributes the `activemq` step kind, self-describing so it appears in the step editor with no engine change.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.workflow"
+      ],
+      "extensionPoints": {
+        "implements": [
+          {
+            "point": "roadmap.workflow.executors",
+            "detail": "activemq publish executor (REST /api/message)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-workflow-activemq",
+      "wheel": "roadmap_plugin_workflow_activemq-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_workflow_activemq-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.workflow.assistant",
+      "name": "Workflows — AI assistant",
+      "version": "0.1.0",
+      "description": "AI assistant for the workflow engine: a stateless flow composer that assembles a flow from existing step definitions (their ids/names/kinds/descriptions and which config fields are pre-filled vs blank). The AI never executes anything and never sees a credential; every reference it emits is validated against the stepdef catalog. Serves /api/workflow-assistant.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.workflow",
+        "roadmap.ai",
+        "roadmap.context"
+      ],
+      "extensionPoints": {
+        "implements": [
+          {
+            "point": "roadmap.ai.taskTypes",
+            "detail": "workflow_flow_design AI task type."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-workflow-assistant",
+      "wheel": "roadmap_plugin_workflow_assistant-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_workflow_assistant-0.1.0-py3-none-any.whl"
+    },
+    {
+      "id": "roadmap.workflow.sql",
+      "name": "Workflows — SQL Server executor",
+      "version": "0.1.0",
+      "description": "SQL Server executor for the Roadmap workflow engine. Runs a SQL query or statement via pymssql (no ODBC/JVM); accepts a jdbc:sqlserver:// URL and parses it, with login from the credentials vault (AI-blind). Contributes the `sql` step kind, self-describing so it appears in the step editor with no engine change.",
+      "author": "B2IT",
+      "requires": [
+        "roadmap.workflow"
+      ],
+      "extensionPoints": {
+        "implements": [
+          {
+            "point": "roadmap.workflow.executors",
+            "detail": "sql executor (SQL Server via pyodbc)."
+          }
+        ]
+      },
+      "package": "roadmap-plugin-workflow-sql",
+      "wheel": "roadmap_plugin_workflow_sql-0.1.0-py3-none-any.whl",
+      "downloadUrl": "https://raw.githubusercontent.com/roadmap-mcp/roadmap-dist/main/plugins/roadmap_plugin_workflow_sql-0.1.0-py3-none-any.whl"
     }
   ]
 }
